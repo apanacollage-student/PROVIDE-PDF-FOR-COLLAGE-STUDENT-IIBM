@@ -81,10 +81,11 @@
             </a></div>
             <!-- JavaScript for Username -->
             <script>
-                let username = localStorage.getItem("username");
+    let username = localStorage.getItem('username');
 
-                if (!username) username = "User";
+    if (!username) {
+        username = "User";
+    }
 
-                document.getElementById("welcometext").innerText =
-                    "Welcome, " + username + "!";
-            </script>
+    document.getElementById("welcome").innerText = "Welcome, " + username + "!";
+</script>
