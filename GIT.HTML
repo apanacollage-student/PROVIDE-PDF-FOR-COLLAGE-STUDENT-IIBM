@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIT-PDF</title>
+    
+</head>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Poppins, sans-serif;
+    background: #04275a;
+    color: #fff;
+}
+
+/* Title */
+.pmo {
+    text-align: center;
+    background-color: aqua;
+    padding: 40px 0;
+    margin: 0;
+}
+
+/* Home menu */
+#home1 {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 40px;
+    display: flex;
+    gap: 20px;
+}
+
+.home {
+  
+    display: inline-block;
+    padding: 12px 30px;
+    background: #00eaff;
+    color: #000;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 30px;
+    box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+    transition: 0.3s;
+}
+
+.home:hover {
+    background: #a60739;
+    box-shadow: 0 0 20px #00f6ff, 
+                0 0 40px #00f6ff,
+                0 0 60px #00f6ff;
+    transform: scale(1.05);
+}
+
+/* iframe */
+#if {
+    position: relative;
+    margin: 50px auto;
+    display: block;
+    width: 90%;
+    height: 500px;
+    border-radius: 10px;
+    border: 3px solid red;
+}
+
+/* Download button */
+#btn {
+    background: #007bff;
+    padding: 12px 25px;
+    color: rgb(130, 22, 22);
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+}
+#btn:hover {
+    background: #005fcc;
+}
+.unit1{
+    text-transform: uppercase;
+    text-align: center;
+    
+    
+}
+</style>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+    <div id="home1">
+        <a class="home" href="login.html">home</a>
+       
+    </div>
+
+        <h1 class="unit1">GIT THEORY PDF</h1>
+
+        <iframe id="if" style="transform: scale(1);" src="GIT.pdf" class="pdf"></iframe>
+
+        <!-- Download button -->
+        <a href="GIT.pdf" download="GIT.pdf">
+            <button id="btn">Download PDF</button>
+        </a>
+
+    </div>
+</body>
+</html>

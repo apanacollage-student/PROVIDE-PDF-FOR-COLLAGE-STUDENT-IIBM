@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Login System</title>
+
+    <style>
+        body {
+            background: #6a6a8b;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            width: 340px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            color: white;
+        }
+
+        input, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            background: cyan;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+    background: #071398;
+    box-shadow: 0 0 20px #00f6ff, 
+                0 0 40px #00f6ff,
+                0 0 60px #00f6ff;
+    transform: scale(1.05);
+}  
+
+        .switch {
+            color: yellow;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .msg {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box" id="loginBox">
+        <h2>Login</h2>
+        <input type="text" id="loginUser" placeholder="Enter Username">
+        <input type="password" id="loginPass" placeholder="Enter Password">
+        <button onclick="login()">Login</button>
+        <p class="msg" id="loginMsg"></p>
+        <p class="switch" onclick="showSignup()">Don't have an account? Signup</p>
+    </div>
+
+    <div class="box" id="signupBox" style="display:none;">
+        <h2>Signup</h2>
+        <input type="text" id="signupUser" placeholder="Create Username">
+        <input type="password" id="signupPass" placeholder="Create Password">
+        <button onclick="signup()">Signup</button>
+        <p class="msg" id="signupMsg"></p>
+        <p class="switch" onclick="showLogin()">Already have an account? Login</p>
+    </div>
+
+    <script>
+        // Show signup box
+        function showSignup() {
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("signupBox").style.display = "block";
+        }
+
+        // Show login box
+        function showLogin() {
+            document.getElementById("signupBox").style.display = "none";
+            document.getElementById("loginBox").style.display = "block";
+        }
+
+        // Function for signup
+        function signup() {
+            let user = document.getElementById("signupUser").value;
+            let pass = document.getElementById("signupPass").value;
+
+            if (user === "" || pass === "") {
+                document.getElementById("signupMsg").style.color = "red";
+                document.getElementById("signupMsg").innerText = "Please fill all fields!";
+                return;
+            }
+
+            // Get existing users from localStorage
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Check if user exists
+            let exists = users.some(u => u.username === user);
+
+            if (exists) {
+                document.getElementById("signupMsg").style.color = "red";
+                document.getElementById("signupMsg").innerText = "Username already taken!";
+                return;
+            }
+
+            // Add new user
+            users.push({ username: user, password: pass });
+            localStorage.setItem("users", JSON.stringify(users));
+
+            document.getElementById("signupMsg").style.color = "lightgreen";
+            document.getElementById("signupMsg").innerText = "Signup Successful! Now Login.";
+
+            document.getElementById("signupUser").value = "";
+            document.getElementById("signupPass").value = "";
+        }
+
+        // Function for login
+        function login() {
+            let user = document.getElementById("loginUser").value;
+            let pass = document.getElementById("loginPass").value;
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            let found = users.find(u => u.username === user && u.password === pass);
+
+            if (found) {
+                document.getElementById("loginMsg").style.color = "lightgreen";
+                document.getElementById("loginMsg").innerText = "Login Successful!";
+                 window.location.href = "login.html";
+            } else {
+                document.getElementById("loginMsg").style.color = "red";
+                document.getElementById("loginMsg").innerText = "Wrong Username or Password!";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

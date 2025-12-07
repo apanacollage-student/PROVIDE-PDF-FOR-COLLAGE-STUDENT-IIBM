@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Coming Soon</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: #0C0C0C;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        text-align: center;
+    }
+
+    .container {
+        animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    img {
+        width: 110px;
+        margin-bottom: 15px;
+        filter: drop-shadow(0px 0px 10px #4B8BBE);
+    }
+
+    h1 {
+        font-size: 52px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        animation: glow 2s infinite alternate;
+        color: #4B8BBE; /* Python Blue */
+    }
+
+    @keyframes glow {
+        0% { text-shadow: 0 0 10px #4B8BBE; }
+        100% { text-shadow: 0 0 25px #FFE873; }
+    }
+
+    .code {
+        margin-top: 15px;
+        font-size: 22px;
+        font-family: 'Courier New', monospace;
+        color: #FFE873; /* Python Yellow */
+        animation: blink 1.3s infinite;
+    }
+
+    @keyframes blink {
+        50% { opacity: 0.4; }
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <!-- Python Logo -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg">
+
+    <h1>Python Notes<br>Coming Soon</h1>
+
+    <div class="code">print("Python Notes Coming Soon...")</div>
+</div>
+
+</body>
+</html>
