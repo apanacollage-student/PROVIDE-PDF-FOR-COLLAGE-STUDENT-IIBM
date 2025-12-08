@@ -14,101 +14,188 @@
             min-height: 100vh;
             background: #0404bd;
             font-family: Arial, sans-serif;
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url("https://www.xda-developers.com/wp-content/uploads/2012/03/Code.jpeg");
-            background-size: cover;
             flex-direction: column;
 
+            background-image: url("https://www.xda-developers.com/wp-content/uploads/2012/03/Code.jpeg");
+            background-size: cover;
+            background-position: center;
+            animation: bgMove 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes bgMove {
+            0% { background-position: center; }
+            100% { background-position: bottom; }
         }
 
         .box {
-            width: 600px;
-            background: rgba(227, 219, 219, 0.1);
+            width: 90%;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.12);
             padding: 25px;
             border-radius: 15px;
             backdrop-filter: blur(10px);
             text-align: center;
-            color: rgb(234, 154, 114);
-            font-size: 25PX;
+            color: rgb(255, 220, 150);
+            font-size: 18px;
+            box-shadow: 0 0 20px cyan;
+            animation: floatBox 3s infinite ease-in-out;
         }
 
-        input,
-        button {
+        @keyframes floatBox {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Typing Effect */
+        .title {
+            font-size: 28px;
+            border-right: 3px solid white;
+            width: fit-content;
+            margin: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 2s steps(20), blink .7s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Inputs */
+        input {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 12px 0;
             border-radius: 8px;
             border: none;
-            font-size: 25px;
+            font-size: 18px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            outline: none;
+            transition: 0.3s;
         }
 
+        input:focus {
+            box-shadow: 0 0 12px cyan;
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Button */
         button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 20px;
             background: cyan;
-            font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
         }
 
         button:hover {
-            background: #6c9807;
-            box-shadow: 0 0 20px #00f6ff,
-                0 0 40px #00f6ff,
-                0 0 60px #00f6ff;
+            background: #071398;
+            color: white;
             transform: scale(1.05);
-        }
-
-        .box:hover {
-            box-shadow: 0 0 20px #c91b07, 0 0 40px #86d30a, 0 0 60px #0aacd4;
-            transform: scale(1.05);
-            transition: 0.4s;
-            animation: shake 0.3s linear;
-
+            box-shadow: 0 0 20px #00f6ff;
         }
 
         .switch {
             color: yellow;
             cursor: pointer;
-            font-size: 30px;
+            font-size: 17px;
         }
 
         .msg {
             font-weight: bold;
-            margin-top: 25px;
+            margin-top: 15px;
         }
 
-        
+        /* Eye Icon */
+        .eye {
+            position: relative;
+            float: right;
+            margin-top: -46px;
+            margin-right: 10px;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* Responsive Fix */
+        @media(max-width:450px){
+            .box { max-width: 300px; }
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            font-size: 16px;
+            animation: footerglow 4s infinite alternate;
+        }
+
+        @keyframes footerglow {
+            from { box-shadow: 0 0 10px cyan; }
+            to { box-shadow: 0 0 25px cyan; }
+        }
+
+        footer a {
+            color: cyan;
+            font-size: 22px;
+            margin: 0 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+            text-shadow: 0 0 12px cyan;
+            transform: scale(1.2);
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- ⭐ LOGIN BOX -->
+    <!-- LOGIN BOX -->
     <div class="box" id="loginBox">
-        <h2>Login</h2>
+        <h2 class="title">Login</h2>
 
-        <!-- ⭐ NEW Login FORM for Netlify -->
-        <form name="loginForm" method="POST" data-netlify="true">
-            <input type="text" name="username" id="loginUser" placeholder="Enter Username">
-            <input type="password" name="password" id="loginPass" placeholder="Enter Password">
-            <button type="submit" onclick="login()">Login</button>
-        </form>
+        <input type="text" id="loginUser" placeholder="Enter Username">
+
+        <input type="password" id="loginPass" placeholder="Enter Password">
+        <span class="eye" onclick="togglePass('loginPass')">👁</span>
+
+        <button onclick="login()">Login</button>
 
         <p class="msg" id="loginMsg"></p>
         <p class="switch" onclick="showSignup()">Don't have an account? Signup</p>
     </div>
 
-    <!-- ⭐ SIGNUP BOX -->
+    <!-- SIGNUP BOX -->
     <div class="box" id="signupBox" style="display:none;">
-        <h2>Signup</h2>
+        <h2 class="title">Signup</h2>
 
-        <!-- ⭐ NEW Signup FORM for Netlify -->
-        <form name="signupForm" method="POST" data-netlify="true">
-            <input type="text" name="username" id="signupUser" placeholder="Create Username">
-            <input type="password" name="password" id="signupPass" placeholder="Create Password">
-            <button type="submit" onclick="signup()">Signup</button>
-        </form>
+        <input type="text" id="signupUser" placeholder="Create Username">
+
+        <input type="password" id="signupPass" placeholder="Create Password">
+        <span class="eye" onclick="togglePass('signupPass')">👁</span>
+
+        <button onclick="signup()">Signup</button>
 
         <p class="msg" id="signupMsg"></p>
         <p class="switch" onclick="showLogin()">Already have an account? Login</p>
@@ -117,6 +204,11 @@
 
 
     <script>
+        function togglePass(id){
+            let input = document.getElementById(id);
+            input.type = (input.type === "password") ? "text" : "password";
+        }
+
         function showSignup() {
             document.getElementById("loginBox").style.display = "none";
             document.getElementById("signupBox").style.display = "block";
@@ -127,80 +219,61 @@
             document.getElementById("loginBox").style.display = "block";
         }
 
-        /* ⭐ SAME LOCALSTORAGE SYSTEM (No change) */
+        // SIGNUP SYSTEM
         function signup() {
-            let user = document.getElementById("signupUser").value;
-            let pass = document.getElementById("signupPass").value;
+            let user = signupUser.value;
+            let pass = signupPass.value;
 
-            if (user === "" || pass === "") {
-                document.getElementById("signupMsg").style.color = "red";
-                document.getElementById("signupMsg").innerText = "Please fill all fields!";
+            if (!user || !pass) {
+                signupMsg.style.color = "red";
+                signupMsg.innerText = "Please fill all fields!";
                 return;
             }
 
             let users = JSON.parse(localStorage.getItem("users")) || [];
 
             if (users.some(u => u.username === user)) {
-                document.getElementById("signupMsg").style.color = "red";
-                document.getElementById("signupMsg").innerText = "Username already taken!";
+                signupMsg.style.color = "red";
+                signupMsg.innerText = "Username already taken!";
                 return;
             }
 
             users.push({ username: user, password: pass });
             localStorage.setItem("users", JSON.stringify(users));
 
-            document.getElementById("signupMsg").style.color = "lightgreen";
-            document.getElementById("signupMsg").innerText = "Signup Successful!";
+            signupMsg.style.color = "lightgreen";
+            signupMsg.innerText = "Signup Successful!";
         }
 
+        // LOGIN SYSTEM
         function login() {
-            let user = document.getElementById("loginUser").value;
-            let pass = document.getElementById("loginPass").value;
+            let user = loginUser.value;
+            let pass = loginPass.value;
 
             let users = JSON.parse(localStorage.getItem("users")) || [];
             let found = users.find(u => u.username === user && u.password === pass);
 
             if (found) {
-                document.getElementById("loginMsg").style.color = "lightgreen";
-                document.getElementById("loginMsg").innerText = "Login Successful!";
+                loginMsg.style.color = "lightgreen";
+                loginMsg.innerText = "Login Successful!";
                 window.location.href = "SELECT.html";
             } else {
-                document.getElementById("loginMsg").style.color = "red";
-                document.getElementById("loginMsg").innerText = "Wrong Username or Password!";
+                loginMsg.style.color = "red";
+                loginMsg.innerText = "Wrong Username or Password!";
             }
         }
     </script>
-    <!--FOOTER
-    <footer id="footer">
 
-        <h3 style="margin: 0; font-size: 22px; letter-spacing: 1px;">
-            © 2025 | Made with ❤️ by <span style="color:#0a1a1b;">Ayush</span>
-        </h3>
-
-        Social icons 
-        <div style="margin-top: 12px;">
-            <a href="https://www.instagram.com/ayush_yadav____0
-            " target="_blank" style="margin: 0 10px; color:#051112; font-size:22px; text-decoration:none; transition:.3s;">
-                🌐
-          </a>
-            <a href="#" style="margin: 0 10px; color:#0c0c0c; font-size:22px; text-decoration:none; transition:.3s;">
-                📘
-            </a>
-            <a href="#" style="margin: 0 10px; color:#080908; font-size:22px; text-decoration:none; transition:.3s;">
-                📸
-            </a>
-        </div>
-
-         Copyright 
-        <p style="font-size: 20px; opacity: 0.8; margin-top: 8px;">
-            Student Resource Notes | All Rights Reserved | this page create help:chatgpt only this
+    <footer>
+        © 2025 | Made with ❤️ by Ayush  
+        <br><br>
+        <a href="https://www.instagram.com/ayush_yadav____0" target="_blank">🌐</a>
+        <a href="https://www.iibm.in/">🏫</a>
+        <a href="#">˚˖𓍢ִ໋🌷͙֒✧˚.🎀༘⋆</a>
+        <p style="font-size:14px; opacity:0.7;">
+            Student Resource Notes | All Rights Reserved | this page create help the chatgpt olny this page
         </p>
-
     </footer>
--->
-
-
 
 </body>
-
 </html>
