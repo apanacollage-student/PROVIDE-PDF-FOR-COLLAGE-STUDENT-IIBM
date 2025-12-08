@@ -4,37 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Login System</title>
+    <title>Signup Login</title>
     <link rel="icon" type="image/png" href="favicon.png">
-
 
     <style>
         body {
-            background: #6a6a8b;
+            background: #0404bd;
             font-family: Arial, sans-serif;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-image: url("https://www.xda-developers.com/wp-content/uploads/2012/03/Code.jpeg");
+            background-size: cover;
+
         }
 
         .box {
-            width: 340px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 600px;
+            background: rgba(227, 219, 219, 0.1);
             padding: 25px;
             border-radius: 15px;
             backdrop-filter: blur(10px);
             text-align: center;
-            color: white;
+            color: rgb(234, 154, 114);
+            font-size: 25PX;
         }
 
-        input, button {
-            width: 90%;
+        input,
+        button {
+            width: 100%;
             padding: 10px;
             margin: 10px 0;
             border-radius: 8px;
             border: none;
-            font-size: 16px;
+            font-size: 25px;
         }
 
         button {
@@ -42,61 +46,94 @@
             font-weight: bold;
             cursor: pointer;
         }
+
         button:hover {
-    background: #071398;
-    box-shadow: 0 0 20px #00f6ff, 
+            background: #6c9807;
+            box-shadow: 0 0 20px #00f6ff,
                 0 0 40px #00f6ff,
                 0 0 60px #00f6ff;
-    transform: scale(1.05);
-}  
+            transform: scale(1.05);
+        }
+
+        .box:hover {
+            box-shadow: 0 0 20px #c91b07, 0 0 40px #86d30a, 0 0 60px #0aacd4;
+            transform: scale(1.05);
+            transition: 0.4s;
+            animation: shake 0.3s linear;
+
+        }
 
         .switch {
             color: yellow;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 30px;
         }
 
         .msg {
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 25px;
+        }
+
+        #footer {
+            width: 100%;
+            text-align: center;
+            background-color: #b4babb;
+            position: absolute;
+            margin-top: 50%;
+            background-image: url("");
+            color: #000000;
+
+
         }
     </style>
 </head>
 
 <body>
 
+    <!-- ⭐ LOGIN BOX -->
     <div class="box" id="loginBox">
         <h2>Login</h2>
-        <input type="text" id="loginUser" placeholder="Enter Username">
-        <input type="password" id="loginPass" placeholder="Enter Password">
-        <button onclick="login()">Login</button>
+
+        <!-- ⭐ NEW Login FORM for Netlify -->
+        <form name="loginForm" method="POST" data-netlify="true">
+            <input type="text" name="username" id="loginUser" placeholder="Enter Username">
+            <input type="password" name="password" id="loginPass" placeholder="Enter Password">
+            <button type="submit" onclick="login()">Login</button>
+        </form>
+
         <p class="msg" id="loginMsg"></p>
         <p class="switch" onclick="showSignup()">Don't have an account? Signup</p>
     </div>
 
+    <!-- ⭐ SIGNUP BOX -->
     <div class="box" id="signupBox" style="display:none;">
         <h2>Signup</h2>
-        <input type="text" id="signupUser" placeholder="Create Username">
-        <input type="password" id="signupPass" placeholder="Create Password">
-        <button onclick="signup()">Signup</button>
+
+        <!-- ⭐ NEW Signup FORM for Netlify -->
+        <form name="signupForm" method="POST" data-netlify="true">
+            <input type="text" name="username" id="signupUser" placeholder="Create Username">
+            <input type="password" name="password" id="signupPass" placeholder="Create Password">
+            <button type="submit" onclick="signup()">Signup</button>
+        </form>
+
         <p class="msg" id="signupMsg"></p>
         <p class="switch" onclick="showLogin()">Already have an account? Login</p>
     </div>
 
+
+
     <script>
-        // Show signup box
         function showSignup() {
             document.getElementById("loginBox").style.display = "none";
             document.getElementById("signupBox").style.display = "block";
         }
 
-        // Show login box
         function showLogin() {
             document.getElementById("signupBox").style.display = "none";
             document.getElementById("loginBox").style.display = "block";
         }
 
-        // Function for signup
+        /* ⭐ SAME LOCALSTORAGE SYSTEM (No change) */
         function signup() {
             let user = document.getElementById("signupUser").value;
             let pass = document.getElementById("signupPass").value;
@@ -107,48 +144,67 @@
                 return;
             }
 
-            // Get existing users from localStorage
             let users = JSON.parse(localStorage.getItem("users")) || [];
 
-            // Check if user exists
-            let exists = users.some(u => u.username === user);
-
-            if (exists) {
+            if (users.some(u => u.username === user)) {
                 document.getElementById("signupMsg").style.color = "red";
                 document.getElementById("signupMsg").innerText = "Username already taken!";
                 return;
             }
 
-            // Add new user
             users.push({ username: user, password: pass });
             localStorage.setItem("users", JSON.stringify(users));
 
             document.getElementById("signupMsg").style.color = "lightgreen";
-            document.getElementById("signupMsg").innerText = "Signup Successful! Now Login.";
-
-            document.getElementById("signupUser").value = "";
-            document.getElementById("signupPass").value = "";
+            document.getElementById("signupMsg").innerText = "Signup Successful!";
         }
 
-        // Function for login
         function login() {
             let user = document.getElementById("loginUser").value;
             let pass = document.getElementById("loginPass").value;
 
             let users = JSON.parse(localStorage.getItem("users")) || [];
-
             let found = users.find(u => u.username === user && u.password === pass);
 
             if (found) {
                 document.getElementById("loginMsg").style.color = "lightgreen";
                 document.getElementById("loginMsg").innerText = "Login Successful!";
-                 window.location.href = "login.html";
+                window.location.href = "SELECT.html";
             } else {
                 document.getElementById("loginMsg").style.color = "red";
                 document.getElementById("loginMsg").innerText = "Wrong Username or Password!";
             }
         }
     </script>
+    <!--FOOTER-->
+    <footer id="footer">
+
+        <h3 style="margin: 0; font-size: 22px; letter-spacing: 1px;">
+            © 2025 | Made with ❤️ by <span style="color:#0a1a1b;">Ayush</span>
+        </h3>
+
+        <!-- Social icons -->
+        <div style="margin-top: 12px;">
+            <a href="https://www.instagram.com/ayush_yadav____0
+            " target="_blank" style="margin: 0 10px; color:#051112; font-size:22px; text-decoration:none; transition:.3s;">
+                🌐
+           <!-- </a>
+            <a href="#" style="margin: 0 10px; color:#0c0c0c; font-size:22px; text-decoration:none; transition:.3s;">
+                📘
+            </a>
+            <a href="#" style="margin: 0 10px; color:#080908; font-size:22px; text-decoration:none; transition:.3s;">
+                📸
+            </a>-->
+        </div>
+
+        <!-- Copyright -->
+        <p style="font-size: 20px; opacity: 0.8; margin-top: 8px;">
+            Student Resource Notes | All Rights Reserved | this page create help:chatgpt only this
+        </p>
+
+    </footer>
+
+
 
 </body>
 

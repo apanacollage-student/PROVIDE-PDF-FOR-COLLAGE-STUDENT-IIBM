@@ -1,126 +1,147 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FIRST-SEMESTER-PMO</title> <!-- ✓ अब title दिखेगा -->
+
+    <link rel="icon" type="image/png" href="favicon.png"> <!-- ✓ अब icon भी दिखेगा -->
     <link rel="stylesheet" href="style.css">
-</head>
-<link rel="icon" type="image/png" href="favicon.png">
-<style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Poppins, sans-serif;
-    background: #04275a;
-    color: #fff;
-}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Poppins, sans-serif;
+            background: #04275a;
+            color: #fff;
+            background-image: url("https://wallpaperaccess.com/full/1267635.png");
+            background-repeat: repeat;
+            background-size: cover;
+        }
 
-/* Title */
-.pmo {
-    text-align: center;
-    background-color: aqua;
-    padding: 40px 0;
-    margin: 0;
-}
+        /* Title */
+        .pmo {
+            text-align: center;
+            background-color: aqua;
+            padding: 40px 0;
+            margin: 0;
+        }
 
-/* Home menu */
-#home1 {
-    position: absolute;
-    margin-top: 30px;
-    margin-left: 40px;
-    display: flex;
-    gap: 20px;
-}
+        /* Home menu */
+        #home1 {
+            position: absolute;
+            margin-top: 30px;
+            margin-left: 40px;
+            display: flex;
+            gap: 20px;
+        }
 
-.home {
-  
-    display: inline-block;
-    padding: 12px 30px;
-    background: #00eaff;
-    color: #000;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 30px;
-    box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
-    transition: 0.3s;
-}
+        .home {
 
-.home:hover {
-    background: #a60739;
-    box-shadow: 0 0 20px #00f6ff, 
+            display: inline-block;
+            padding: 12px 30px;
+            background: #00eaff;
+            color: #000;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 30px;
+            box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+            transition: 0.3s;
+        }
+
+        .home:hover {
+            background: #a60739;
+            box-shadow: 0 0 20px #00f6ff,
                 0 0 40px #00f6ff,
                 0 0 60px #00f6ff;
-    transform: scale(1.05);
-}
+            transform: scale(1.05);
+        }
 
-/* iframe */
-#if {
-    position: relative;
-    margin: 50px auto;
-    display: block;
-    width: 90%;
-    height: 500px;
-    border-radius: 10px;
-    border: 3px solid red;
-}
+        /* iframe */
+        #if {
+            position: relative;
+            margin: 50px auto;
+            display: block;
+            width: 90%;
+            height: 700px;
+            border-radius: 10px;
+            border: 3px solid red;
+        }
 
-/* Download button */
-#btn {
-    background: #007bff;
-    padding: 12px 25px;
-    color: rgb(130, 22, 22);
-    border-radius: 8px;
-    text-decoration: none;
-    text-align: center;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    display: block;
-    margin: 20px auto;
-}
-#btn:hover {
-    background: #005fcc;
-}
-.unit1{
-    text-transform: uppercase;
-    text-align: center;
-    
-}
-</style>
+        /* Download button */
+        #btn {
+            background: #007bff;
+            padding: 12px 25px;
+            color: rgb(130, 22, 22);
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+
+        #btn:hover {
+            background: #005fcc;
+        }
+
+        .unit1 {
+            text-transform: uppercase;
+            text-align: center;
+
+        }
+
+        @media (max-width:600px) {
+            ifeame {
+                height: 800px;
+            }
+        }
+    </style>
 
 <body>
 
     <!-- Navigation -->
     <div id="home1">
-        <a class="home" href="login.html">home</a>
-      
+        <a class="home" href="FIRSTSEM.html">home</a>
+
     </div>
 
     <!-- Content -->
     <div class="container">
 
         <h1 class="pmo">PRINCIPLE AND MANAGEMENT AND ORGINATION</h1>
- <h1 class="unit1">all rivision</h1>
+        <h1 class="unit1">all rivision</h1>
 
-        <iframe id="if" style="transform: scale(1);" src="pmo.pdf" class="pdf"></iframe>
+        <iframe id="if" style="transform: scale(1);"
+            src="https://drive.google.com/file/d/1Llujx64Voa2EB_IF9Z9R83PJuvJJ_2RO/preview" class="pdf"></iframe>
 
         <!-- Download button -->
-        <a href="PMO.pdf" download="PMO.pdf">
+        <a href="https://drive.google.com/file/d/1Llujx64Voa2EB_IF9Z9R83PJuvJJ_2RO/preview"
+            download="https://drive.google.com/file/d/1Llujx64Voa2EB_IF9Z9R83PJuvJJ_2RO/preview">
             <button id="btn">Download PDF</button>
         </a>
-      <!-- unit1 -->
+        <!-- unit1 -->
     </div>
     <div class="container">
 
         <h1 class="unit1">HAND WRITTEN PDF UNIT1</h1>
 
-        <iframe id="if" style="transform: scale(1);" src="BCA Management Unit 1 (1).pdf" class="pdf"></iframe>
+        <iframe id="if" style="transform: scale(1);"
+            src="https://drive.google.com/file/d/19AYpGQi7NygIYNmxZhqv1eu-I1H8f-oG/preview" class="pdf"></iframe>
 
         <!-- Download button -->
-        <a href="PMO.pdf" download="PMO.pdf">
+        <a href="https://drive.google.com/file/d/19AYpGQi7NygIYNmxZhqv1eu-I1H8f-oG/preview"
+            download="https://drive.google.com/file/d/19AYpGQi7NygIYNmxZhqv1eu-I1H8f-oG/preview">
             <button id="btn">Download PDF</button>
         </a>
 
     </div>
 
 </body>
+
 </html>
