@@ -5,9 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>FIRST-SEMESTER-PMO</title> <!-- ✓ अब title दिखेगा -->
+    <title>FIRST-SEMESTER-PMO</title> <!-- ✓ title -->
 
-    <link rel="icon" type="image/png" href="favicon.png"> <!-- ✓ अब icon भी दिखेगा -->
+    <!-- ⭐ LOGIN PROTECTION -->
+    <script>
+        if (localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "index.html";  // login page redirect
+        }
+    </script>
+
+    <link rel="icon" type="image/png" href="favicon.png"> <!-- icon  -->
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -39,7 +46,6 @@
         }
 
         .home {
-
             display: inline-block;
             padding: 12px 30px;
             background: #00eaff;
@@ -92,11 +98,10 @@
 
         .unit1 {
             width: fit-content;
-    color:rgb(205, 50, 202);
-    text-align: center;
-    background-color: #9bc4ce;
-    margin: 0 auto
-
+            color: rgb(205, 50, 202);
+            text-align: center;
+            background-color: #9bc4ce;
+            margin: 0 auto
         }
 
         @media (max-width:600px) {
@@ -105,13 +110,15 @@
             }
         }
     </style>
+</head>
 
 <body>
+
+   
 
     <!-- Navigation -->
     <div id="home1">
         <a class="home" href="FIRSTSEM.html">home</a>
-
     </div>
 
     <!-- Content -->
@@ -128,9 +135,10 @@
             download="https://drive.google.com/file/d/1Llujx64Voa2EB_IF9Z9R83PJuvJJ_2RO/preview">
             <button id="btn">Download PDF</button>
         </a>
-        <HR>
+        <hr>
         <!-- unit1 -->
     </div>
+
     <div class="container">
 
         <h1 class="unit1">HAND WRITTEN PDF UNIT1</h1>
@@ -146,6 +154,7 @@
 
     </div>
 
-</body>
+    
 
+</body>
 </html>

@@ -50,7 +50,6 @@
             100% { transform: translateY(0); }
         }
 
-        /* Typing Effect */
         .title {
             font-size: 28px;
             border-right: 3px solid white;
@@ -69,7 +68,6 @@
             50% { border-color: transparent; }
         }
 
-        /* Inputs */
         input {
             width: 100%;
             padding: 12px;
@@ -88,7 +86,6 @@
             background: rgba(255,255,255,0.3);
         }
 
-        /* Button */
         button {
             width: 100%;
             padding: 12px;
@@ -121,7 +118,6 @@
             margin-top: 15px;
         }
 
-        /* Eye Icon */
         .eye {
             position: relative;
             float: right;
@@ -131,12 +127,10 @@
             color: white;
         }
 
-        /* Responsive Fix */
         @media(max-width:450px){
             .box { max-width: 300px; }
         }
 
-        /* Footer */
         footer {
             margin-top: 40px;
             width: 100%;
@@ -182,7 +176,6 @@
 
         <button type="button" onclick="login()">Login</button>
 
-
         <p class="msg" id="loginMsg"></p>
         <p class="switch" onclick="showSignup()">Don't have an account? Signup</p>
     </div>
@@ -192,18 +185,14 @@
         <h2 class="title">Signup</h2>
 
         <input type="text" id="signupUser" placeholder="Create Username">
-
         <input type="password" id="signupPass" placeholder="Create Password">
         <span class="eye" onclick="togglePass('signupPass')">👁</span>
 
         <button type="button" onclick="signup()">Signup</button>
 
-
         <p class="msg" id="signupMsg"></p>
         <p class="switch" onclick="showLogin()">Already have an account? Login</p>
     </div>
-
-
 
     <script>
         function togglePass(id){
@@ -247,7 +236,7 @@
             signupMsg.innerText = "Signup Successful!";
         }
 
-        // LOGIN SYSTEM
+        // ⭐ FINAL LOGIN SYSTEM (UPDATED)
         function login() {
             let user = loginUser.value;
             let pass = loginPass.value;
@@ -258,6 +247,11 @@
             if (found) {
                 loginMsg.style.color = "lightgreen";
                 loginMsg.innerText = "Login Successful!";
+
+                // ⭐ ADDED — SAVE LOGIN SESSION
+                localStorage.setItem("loggedIn", "true");
+                localStorage.setItem("currentUser", user);
+
                 window.location.href = "SELECT.html";
             } else {
                 loginMsg.style.color = "red";
@@ -273,7 +267,7 @@
         <a href="https://www.iibm.in/">🏫</a>
         <a href="#">˚˖𓍢ִ໋🌷͙֒✧˚.🎀༘⋆</a>
         <p style="font-size:14px; opacity:0.7;">
-            Student Resource Notes | All Rights Reserved | this page create help the chatgpt olny this page
+            Student Resource Notes | All Rights Reserved | this page create help the chatgpt only
         </p>
     </footer>
 

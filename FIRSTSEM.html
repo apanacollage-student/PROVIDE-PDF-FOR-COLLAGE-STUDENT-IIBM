@@ -5,13 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FIRST-SEMESTER-HOME</title>
+ <!-- ⭐ LOGIN PROTECTION -->
+    <script>
+        if (localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "index.html";  // login page redirect
+        }
+    </script>
+
+
 <link rel="icon" type="image/png" href="favicon.png">
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+      <!-- ⭐ LOGOUT BUTTON (added but design same) -->
+    <div style="text-align:right; padding:15px;">
+        <button onclick="logout()" 
+            style="background:red; color:white; padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-size:18px;">
+            Logout
+        </button>
+    </div>
+    <!-- ⭐ LOGOUT SCRIPT -->
+    <script>
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("currentUser");
+            window.location.href = "index.html";
+        }
+    </script>
 
+<!--body-->
     <h1 id="welcome"></h1>
     <p class="subtitle">Student Learning Resource NOTES Website</p>
 

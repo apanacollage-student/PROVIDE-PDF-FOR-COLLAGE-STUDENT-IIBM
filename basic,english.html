@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BASIC-ENGLISH</title>
+    <!-- ⭐ LOGIN PROTECTION -->
+    <script>
+        if (localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "index.html";  // login page redirect
+        }
+    </script>
+
     <link rel="icon" type="image/png" href="favicon.png">
 
 </head>
@@ -104,6 +111,8 @@
 </style>
 
 <body>
+
+
     <div class="container">
         <!-- Navigation -->
         <div id="home1">
@@ -210,6 +219,7 @@
         </a>
 
     </div>
+     
 </body>
 
 </html>

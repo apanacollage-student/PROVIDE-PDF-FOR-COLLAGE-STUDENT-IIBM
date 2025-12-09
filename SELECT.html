@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>select-semester</title>
+ <!-- ⭐ LOGIN PROTECTION -->
+    <script>
+        if (localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "index.html";  // login page redirect
+        }
+    </script>
+
     <style>
         body {
             text-align: center;
@@ -64,6 +71,12 @@
 
 
     </div>
+    <script>
+        //user ke baare me jaanan
+let users = JSON.parse(localStorage.getItem("users")) || [];
+console.log("Registered Users:", users);
+</script>
+
 </body>
 
 </html>
