@@ -127,10 +127,6 @@
             color: white;
         }
 
-        @media(max-width:450px){
-            .box { max-width: 300px; }
-        }
-
         footer {
             margin-top: 40px;
             width: 100%;
@@ -170,7 +166,6 @@
         <h2 class="title">Login_ ❤️ by Ayush </h2>
 
         <input type="text" id="loginUser" placeholder="Enter Username">
-
         <input type="password" id="loginPass" placeholder="Enter Password">
         <span class="eye" onclick="togglePass('loginPass')">👁</span>
 
@@ -194,6 +189,22 @@
         <p class="switch" onclick="showLogin()">Already have an account? Login</p>
     </div>
 
+    <!-- 💚 DONATE SECTION (ADDED) -->
+    <div style="
+        max-width:350px;
+        margin:40px auto;
+        padding:25px;
+        text-align:center;
+        background:rgba(0,0,0,0.5);
+        border-radius:15px;
+        box-shadow:0 0 20px rgb(154, 4, 104);
+        color:white;">
+        <h3>Support This Project</h3>
+        <p style="font-size:14px;opacity:0.8;">Donate via UPI</p>
+        <input id="donateAmount" type="number" placeholder="Enter amount ₹" min="1">
+        <button onclick="donateUPI()">Donate via UPI </button>
+    </div>
+
     <script>
         function togglePass(id){
             let input = document.getElementById(id);
@@ -201,16 +212,15 @@
         }
 
         function showSignup() {
-            document.getElementById("loginBox").style.display = "none";
-            document.getElementById("signupBox").style.display = "block";
+            loginBox.style.display = "none";
+            signupBox.style.display = "block";
         }
 
         function showLogin() {
-            document.getElementById("signupBox").style.display = "none";
-            document.getElementById("loginBox").style.display = "block";
+            signupBox.style.display = "none";
+            loginBox.style.display = "block";
         }
 
-        // SIGNUP SYSTEM
         function signup() {
             let user = signupUser.value;
             let pass = signupPass.value;
@@ -236,7 +246,6 @@
             signupMsg.innerText = "Signup Successful!";
         }
 
-        // ⭐ FINAL LOGIN SYSTEM (UPDATED)
         function login() {
             let user = loginUser.value;
             let pass = loginPass.value;
@@ -245,29 +254,39 @@
             let found = users.find(u => u.username === user && u.password === pass);
 
             if (found) {
-                loginMsg.style.color = "lightgreen";
-                loginMsg.innerText = "Login Successful!";
-
-                // ⭐ ADDED — SAVE LOGIN SESSION
                 localStorage.setItem("loggedIn", "true");
                 localStorage.setItem("currentUser", user);
-
                 window.location.href = "SELECT.html";
             } else {
                 loginMsg.style.color = "red";
                 loginMsg.innerText = "Wrong Username or Password!";
             }
         }
+
+        // 💚 UPI DONATE FUNCTION
+        function donateUPI(){
+            const amount = document.getElementById("donateAmount").value;
+            if(!amount || amount <= 0){
+                alert("Enter valid amount");
+                return;
+            }
+
+            const upiId = "8579862692@upi"; // 🔴 CHANGE THIS
+            const name = "Ayush Website";
+            const note = "Support Donation";
+
+            const url = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
+            window.location.href = url;
+        }
     </script>
 
     <footer>
         © 2025 | Made with ❤️ by Ayush  
         <br><br>
-        <a  href="https://www.instagram.com/ayush_yadav____0" target="_blank">◎ instagram</a>
+        <a href="https://www.instagram.com/ayush_yadav____0" target="_blank">◎ instagram</a>
         <a href="https://www.iibm.in/">🏫iibm</a>
-        <a href="#">🎀 </a>
-        <p style="font-size:14px; opacity:0.7;">
-            Student Resource Notes | All Rights Reserved | this page create help the chatgpt 
+        <p style="font-size:14px;opacity:0.7;">
+            Student Resource Notes | All Rights Reserved
         </p>
     </footer>
 
