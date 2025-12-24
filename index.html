@@ -1,294 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Login</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup Login</title>
+<link rel="icon" type="image/png" href="favicon.png">
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background: #0404bd;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+<style>
+body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background:url("https://www.xda-developers.com/wp-content/uploads/2012/03/Code.jpeg") center/cover;
+    animation:bgMove 15s infinite alternate;
+}
+@keyframes bgMove{from{background-position:center}to{background-position:bottom}}
 
-            background-image: url("https://www.xda-developers.com/wp-content/uploads/2012/03/Code.jpeg");
-            background-size: cover;
-            background-position: center;
-            animation: bgMove 15s infinite alternate ease-in-out;
-        }
+.box{
+    
+    width:90%;
+    max-width:350px;
+    background:rgba(255,255,255,.12);
+    padding:25px;
+    border-radius:15px;
+    backdrop-filter:blur(10px);
+    text-align:center;
+    color:rgb(255,220,150);
+    box-shadow:0 0 20px cyan;
+    margin-top:20px;
+}
 
-        @keyframes bgMove {
-            0% { background-position: center; }
-            100% { background-position: bottom; }
-        }
+.title{
+    font-size:28px;
+    border-right:3px solid white;
+    white-space:nowrap;
+    overflow:hidden;
+    animation:typing 2s steps(20),blink .7s infinite;
+}
+@keyframes typing{from{width:0}}
+@keyframes blink{50%{border-color:transparent}}
 
-        .box {
-            width: 90%;
-            max-width: 350px;
-            background: rgba(255, 255, 255, 0.12);
-            padding: 25px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            text-align: center;
-            color: rgb(255, 220, 150);
-            font-size: 18px;
-            box-shadow: 0 0 20px cyan;
-            animation: floatBox 3s infinite ease-in-out;
-        }
+input{
+    width:100%;
+    padding:12px;
+    margin:12px 0;
+    border-radius:8px;
+    border:none;
+    font-size:18px;
+    background:rgba(255,255,255,.25);
+    color:white;
+    outline:none;
+}
 
-        @keyframes floatBox {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
-        }
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    font-size:18px;
+    background:cyan;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+}
+button:hover{
+    background:#071398;
+    color:white;
+}
 
-        .title {
-            font-size: 28px;
-            border-right: 3px solid white;
-            width: fit-content;
-            margin: auto;
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typing 2s steps(20), blink .7s infinite;
-        }
+.switch{color:yellow;cursor:pointer}
+.msg{margin-top:10px;font-weight:bold}
+.eye{float:right;margin-top:-42px;margin-right:10px;cursor:pointer}
 
-        @keyframes typing {
-            from { width: 0; }
-        }
 
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 12px 0;
-            border-radius: 8px;
-            border: none;
-            font-size: 18px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            box-shadow: 0 0 12px cyan;
-            background: rgba(255,255,255,0.3);
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            font-size: 20px;
-            background: cyan;
-            border-radius: 8px;
-            cursor: pointer;
-            border: none;
-            position: relative;
-            overflow: hidden;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #071398;
-            color: white;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #00f6ff;
-        }
-
-        .switch {
-            color: yellow;
-            cursor: pointer;
-            font-size: 17px;
-        }
-
-        .msg {
-            font-weight: bold;
-            margin-top: 15px;
-        }
-
-        .eye {
-            position: relative;
-            float: right;
-            margin-top: -46px;
-            margin-right: 10px;
-            cursor: pointer;
-            color: white;
-        }
-
-        footer {
-            margin-top: 40px;
-            width: 100%;
-            text-align: center;
-            padding: 15px 0;
-            background: rgba(0, 0, 0, 0.4);
-            color: white;
-            font-size: 16px;
-            animation: footerglow 4s infinite alternate;
-        }
-
-        @keyframes footerglow {
-            from { box-shadow: 0 0 10px cyan; }
-            to { box-shadow: 0 0 25px cyan; }
-        }
-
-        footer a {
-            color: cyan;
-            font-size: 30px;
-            margin: 0 8px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        footer a:hover {
-            color: white;
-            text-shadow: 0 0 12px cyan;
-            transform: scale(1.2);
-        }
-    </style>
+/* ORIGINAL FOOTER STYLE */
+footer{
+    margin-top:40px;
+    width:100%;
+    text-align:center;
+    padding:15px 0;
+    background:rgba(0,0,0,0.4);
+    color:white;
+    font-size:16px;
+    animation:footerglow 4s infinite alternate;
+}
+@keyframes footerglow{
+    from{box-shadow:0 0 10px cyan;}
+    to{box-shadow:0 0 25px cyan;}
+}
+footer a{
+    color:cyan;
+    font-size:30px;
+    margin:0 8px;
+    text-decoration:none;
+    transition:.3s;
+}
+footer a:hover{
+    color:white;
+    text-shadow:0 0 12px cyan;
+    transform:scale(1.2);
+}
+</style>
 </head>
 
 <body>
 
-    <!-- LOGIN BOX -->
-    <div class="box" id="loginBox">
-        <h2 class="title">Login_ ❤️ by Ayush </h2>
+<!-- LOGIN -->
+<div class="box" id="loginBox">
+    <h2 class="title">Login_ ❤️ by Ayush</h2>
+    <input id="loginUser" placeholder="Username">
+    <input id="loginPass" type="password" placeholder="Password">
+    <span class="eye" onclick="togglePass('loginPass')">👁</span>
+    <button onclick="login()">Login</button>
+    <p class="msg" id="loginMsg"></p>
+    <p class="switch" onclick="showSignup()">Don't have an account? Signup</p>
+</div>
 
-        <input type="text" id="loginUser" placeholder="Enter Username">
-        <input type="password" id="loginPass" placeholder="Enter Password">
-        <span class="eye" onclick="togglePass('loginPass')">👁</span>
+<!-- SIGNUP -->
+<div class="box" id="signupBox" style="display:none;">
+    <h2 class="title">Signup</h2>
+    <input id="signupUser" placeholder="Username">
+    <input id="signupPass" type="password" placeholder="Password">
+    <span class="eye" onclick="togglePass('signupPass')">👁</span>
+    <button onclick="signup()">Signup</button>
+    <p class="msg" id="signupMsg"></p>
+    <p class="switch" onclick="showLogin()">Already have an account? Login</p>
+</div>
 
-        <button type="button" onclick="login()">Login</button>
+<!-- HORIZONTAL DONATE AREA -->
+<div class="horizontal-wrap">
 
-        <p class="msg" id="loginMsg"></p>
-        <p class="switch" onclick="showSignup()">Don't have an account? Signup</p>
-    </div>
-
-    <!-- SIGNUP BOX -->
-    <div class="box" id="signupBox" style="display:none;">
-        <h2 class="title">Signup</h2>
-
-        <input type="text" id="signupUser" placeholder="Create Username">
-        <input type="password" id="signupPass" placeholder="Create Password">
-        <span class="eye" onclick="togglePass('signupPass')">👁</span>
-
-        <button type="button" onclick="signup()">Signup</button>
-
-        <p class="msg" id="signupMsg"></p>
-        <p class="switch" onclick="showLogin()">Already have an account? Login</p>
-    </div>
-
-    <!-- 💚 DONATE SECTION (ADDED) -->
-    <div style="
-        max-width:350px;
-        margin:40px auto;
-        padding:25px;
-        text-align:center;
-        background:rgba(0,0,0,0.5);
-        border-radius:15px;
-        box-shadow:0 0 20px rgb(154, 4, 104);
-        color:white;">
+    <!-- DONATE -->
+    <div class="box">
         <h3>Support This Project</h3>
-        <p style="font-size:14px;opacity:0.8;">Donate via UPI</p>
-        <input id="donateAmount" type="number" placeholder="Enter amount ₹" min="1">
-        <button onclick="donateUPI()">Donate via UPI </button>
+        <input id="donateAmount" type="number" placeholder="Enter amount ₹">
+        <button onclick="donateUPI()">Donate via UPI</button>
+        <p style="font-size:13px;opacity:.8;margin-top:8px;">
+            Payment ke baad <b>I have paid</b> pe click karein.
+        </p>
+        <button onclick="confirmPayment()" style="background:lime;color:black;">
+            ✅ I have paid
+        </button>
     </div>
 
-    <script>
-        function togglePass(id){
-            let input = document.getElementById(id);
-            input.type = (input.type === "password") ? "text" : "password";
-        }
-
-        function showSignup() {
-            loginBox.style.display = "none";
-            signupBox.style.display = "block";
-        }
-
-        function showLogin() {
-            signupBox.style.display = "none";
-            loginBox.style.display = "block";
-        }
-
-        function signup() {
-            let user = signupUser.value;
-            let pass = signupPass.value;
-
-            if (!user || !pass) {
-                signupMsg.style.color = "red";
-                signupMsg.innerText = "Please fill all fields!";
-                return;
-            }
-
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-
-            if (users.some(u => u.username === user)) {
-                signupMsg.style.color = "red";
-                signupMsg.innerText = "Username already taken!";
-                return;
-            }
-
-            users.push({ username: user, password: pass });
-            localStorage.setItem("users", JSON.stringify(users));
-
-            signupMsg.style.color = "lightgreen";
-            signupMsg.innerText = "Signup Successful!";
-        }
-
-        function login() {
-            let user = loginUser.value;
-            let pass = loginPass.value;
-
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-            let found = users.find(u => u.username === user && u.password === pass);
-
-            if (found) {
-                localStorage.setItem("loggedIn", "true");
-                localStorage.setItem("currentUser", user);
-                window.location.href = "SELECT.html";
-            } else {
-                loginMsg.style.color = "red";
-                loginMsg.innerText = "Wrong Username or Password!";
-            }
-        }
-
-        // 💚 UPI DONATE FUNCTION
-        function donateUPI(){
-            const amount = document.getElementById("donateAmount").value;
-            if(!amount || amount <= 0){
-                alert("Enter valid amount");
-                return;
-            }
-
-            const upiId = "8579862692@upi"; // 🔴 CHANGE THIS
-            const name = "Ayush Website";
-            const note = "Support Donation";
-
-            const url = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
-            window.location.href = url;
-        }
-    </script>
-
-    <footer>
-        © 2025 | Made with ❤️ by Ayush  
-        <br><br>
-        <a href="https://www.instagram.com/ayush_yadav____0" target="_blank">◎ instagram</a>
-        <a href="https://www.iibm.in/">🏫iibm</a>
-        <p style="font-size:14px;opacity:0.7;">
-            Student Resource Notes | All Rights Reserved
+    <!-- RECEIPT -->
+    <div class="box" id="receiptBox" style="display:none;">
+        <h3>🧾 Donation Receipt</h3>
+        <p><b>Name:</b> <span id="rName"></span></p>
+        <p><b>Amount:</b> ₹<span id="rAmount"></span></p>
+        <p><b>Date:</b> <span id="rDate"></span></p>
+        <p style="font-size:12px;opacity:.7;">
+            *This is a donation acknowledgement.
         </p>
-    </footer>
+    </div>
+
+   
+
+</div>
+
+<!-- ✅ ORIGINAL FOOTER -->
+<footer>
+    © 2025 | Made with ❤️ by Ayush  
+    <br><br>
+    <a href="https://www.instagram.com/ayush_yadav____0" target="_blank">◎ instagram</a>
+    <a href="https://www.iibm.in/">🏫iibm</a>
+    <p style="font-size:14px;opacity:0.7;">
+        Student Resource Notes | All Rights Reserved
+    </p>
+</footer>
+
+<script>
+function togglePass(id){
+    let i=document.getElementById(id);
+    i.type=i.type==="password"?"text":"password";
+}
+function showSignup(){loginBox.style.display="none";signupBox.style.display="block";}
+function showLogin(){signupBox.style.display="none";loginBox.style.display="block";}
+
+function signup(){
+    let u=signupUser.value,p=signupPass.value;
+    if(!u||!p){signupMsg.innerText="Fill all fields";return;}
+    let users=JSON.parse(localStorage.getItem("users"))||[];
+    if(users.some(x=>x.username===u)){signupMsg.innerText="Username taken";return;}
+    users.push({username:u,password:p});
+    localStorage.setItem("users",JSON.stringify(users));
+    signupMsg.innerText="Signup successful";
+}
+
+function login(){
+    let u=loginUser.value,p=loginPass.value;
+    let users=JSON.parse(localStorage.getItem("users"))||[];
+    let ok=users.find(x=>x.username===u&&x.password===p);
+    if(ok){
+        localStorage.setItem("loggedIn","true");
+        localStorage.setItem("currentUser",u);
+        window.location.href="SELECT.html";
+    }else loginMsg.innerText="Wrong Username or Password!";
+}
+
+function donateUPI(){
+    const amt=donateAmount.value;
+    if(!amt){alert("Enter amount");return;}
+    const upiId="8579862692@upi";
+    const name="Ayush Website";
+    const note="Support Donation";
+    const url=`upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amt}&cu=INR&tn=${encodeURIComponent(note)}`;
+    window.location.href=url;
+}
+
+function confirmPayment(){
+    rName.innerText=localStorage.getItem("currentUser")||"Guest";
+    rAmount.innerText=donateAmount.value||"-";
+    rDate.innerText=new Date().toLocaleString();
+    receiptBox.style.display="block";
+    alert(
+      "Thank you 💚\n\n" +
+      "Please send UPI payment screenshot to:\n" +
+      "ayushkumar85890@gmail.com\n\n" +
+      "Thank-you mail will be sent manually."
+    );
+}
+</script>
 
 </body>
 </html>
