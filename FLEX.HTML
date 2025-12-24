@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEXBOX</title>
+    <link rel="stylesheet" href="FLEX.CSS">
+</head>
+<body>
+    <H1> FLEX BOX PLAYGROUND</H1>
+    <DIV id="CONTENER">
+      <div id="BOX1">1</div>
+      <div id="BOX2">2</div>
+      <div id="BOX3">3</div>
+      <div id="BOX4">4</div>
+      <div id="BOX5">5</div>
+
+      
+
+
+    </DIV>
+         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati vero repellendus expedita officia nesciunt hic? Ipsam, molestiae inventore similique libero, consequuntur porro alias est, dolore repellat deserunt fuga maxime quisquam!
+         Laborum m
+        </p>
+
+
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<h1 id="welcome"></h1>
+
+
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Poppins, sans-serif;
+    }
+
+    .box {
+        width: 330px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 25px rgba(255,255,255,0.3);
+        animation: pop 0.8s ease;
+        text-align: center;
+        color: #fff;
+    }
+
+    @keyframes pop {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    h2 {
+        margin-bottom: 15px;
+        font-size: 28px;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px #fff;
+    }
+
+    input {
+        width: 90%;
+        padding: 12px;
+        margin: 12px 0;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        background: rgba(255,255,255,0.2);
+        color: #fff;
+    }
+
+    input::placeholder {
+        color: #e2e2e2;
+    }
+
+    button {
+        width: 95%;
+        padding: 13px;
+        background: #00eaff;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 600;
+        color: #000;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background: #00bcd4;
+        transform: scale(1.05);
+    }
+
+    #msg {
+        margin-top: 12px;
+        color: #ff6b6b;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Welcome User</h2>
+    <input type="text" id="username" placeholder="Enter Name" />
+    <input type="password" id="password" placeholder="Enter Password" />
+    <button onclick="login()">Login</button>
+    <p id="msg"></p>
+</div>
+
+<script>
+function login() {
+    let user = document.getElementById("username").value.trim();
+    let pass = document.getElementById("password").value.trim();
+
+    let correctName = "aayu";     // Apna username
+    let correctPass = "1234";     // Apna password
+
+    if (user.toLowerCase() === correctName && pass === correctPass) {
+
+        // ⭐ User name save karo Home Page ke liye
+        localStorage.setItem("username", user);
+
+        window.location.href = "login.html"; // login ke baad home page
+    } else {
+        document.getElementById("msg").innerText = "Wrong Name or Password!";
+    }
+}
+</script>
+<h1 id="welcome"></h1>
+
+
+
+</body>
+</html>
+
+</body>
+</html>
