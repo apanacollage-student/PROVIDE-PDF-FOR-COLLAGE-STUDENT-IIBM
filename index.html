@@ -1,189 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login & Donate</title>
-<link rel="icon" type="image/png" href="favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Login</title>
+    <link rel="icon" type="image/png" href="favicon.png">
 
-<style>
-body{
-    margin:0;
-    padding:0;
-    min-height:100vh;
-    font-family:Arial,sans-serif;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    background:url("https://www.xda-developers.com/wp-content/uploads/2012/03/Code.jpeg") center/cover;
-    animation:bgMove 15s infinite alternate;
-}
-@keyframes bgMove{from{background-position:center}to{background-position:bottom}}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #0404bd;
+            font-family: Arial, sans-serif;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-image: url("https://www.xda-developers.com/wp-content/uploads/2012/03/Code.jpeg");
+            background-size: cover;
+            background-position: center;
+            animation: bgMove 15s infinite alternate ease-in-out;
+        }
 
-.box{
-    width:90%;
-    max-width:350px;
-    background:rgba(255,255,255,.12);
-    padding:25px;
-    border-radius:15px;
-    backdrop-filter:blur(10px);
-    text-align:center;
-    color:rgb(255,220,150);
-    box-shadow:0 0 20px cyan;
-}
+        @keyframes bgMove {
+            0% { background-position: center; }
+            100% { background-position: bottom; }
+        }
 
-input{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border-radius:8px;
-    border:none;
-    font-size:16px;
-    background:rgba(255,255,255,.25);
-    color:white;
-}
+        .box {
+            
+            width: 90%;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            color: rgb(255, 220, 150);
+            font-size: 16px;
+            box-shadow: 0 0 20px cyan;
+            animation: floatBox 3s infinite ease-in-out;
+        }
 
-button{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border:none;
-    border-radius:8px;
-    font-size:16px;
-    background:cyan;
-    cursor:pointer;
-}
-button:hover{background:#071398;color:white}
+        @keyframes floatBox {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
 
-/* 🔥 LOGIN + DONATE HORIZONTAL */
-.horizontal-wrap{
-    display:flex;
-    gap:25px;
-    justify-content:center;
-    align-items:flex-start;
-    flex-wrap:wrap;
-    width:100%;
-    margin-top:50px;
-}
+        .title {
+            font-size: 28px;
+            border-right: 3px solid white;
+            width: fit-content;
+            margin: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 2s steps(20), blink .7s infinite;
+        }
 
-/* Donate row */
-.donate-row{
-    display:flex;
-    gap:15px;
-    justify-content:center;
-    align-items:flex-start;
-    flex-wrap:wrap;
-}
-#qrBox img{
-    width:160px;
-    border-radius:10px;
-    box-shadow:0 0 15px lime;
-}
+        @keyframes typing {
+            from { width: 0; }
+        }
 
-footer{
-    margin-top:40px;
-    width:100%;
-    text-align:center;
-    padding:15px;
-    background:rgba(0,0,0,.4);
-    color:white;
-}
-footer a{color:cyan;font-size:28px;margin:0 6px;text-decoration:none}
-</style>
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 18px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            box-shadow: 0 0 12px cyan;
+            background: rgba(255,255,255,0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 20px;
+            background: cyan;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #071398;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00f6ff;
+        }
+
+        .switch {
+            color: yellow;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .msg {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .eye {
+            float: right;
+            margin-top: -46px;
+            margin-right: 10px;
+            cursor: pointer;
+            color: white;
+        }
+
+        footer {
+            margin-top: 40px;
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            font-size: 16px;
+            animation: footerglow 4s infinite alternate;
+        }
+
+        @keyframes footerglow {
+            from { box-shadow: 0 0 10px cyan; }
+            to { box-shadow: 0 0 25px cyan; }
+        }
+
+        footer a {
+            color: cyan;
+            font-size: 30px;
+            margin: 0 8px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- 🔥 LOGIN + DONATE -->
-<div class="horizontal-wrap">
-
-    <!-- LOGIN -->
-    <div class="box">
-        <h2>Login ❤️ by Ayush</h2>
-        <input id="loginUser" placeholder="Username">
-        <input id="loginPass" type="password" placeholder="Password">
-        <button onclick="login()">Login</button>
-        <p id="loginMsg"></p>
-    </div>
-
-    <!-- DONATE -->
-    <div class="box">
-        <h3>🙏 Support This Project</h3>
-        <input id="donateAmount" type="number" placeholder="Enter amount ₹">
-
-        <div class="donate-row">
-            <button onclick="donateUPI()">Donate via UPI</button>
-
-            <div id="qrBox" style="display:none;">
-                <img id="upiQR">
-                <p style="font-size:12px;">Scan & Pay</p>
-            </div>
-        </div>
-
-        <button onclick="confirmPayment()" style="background:lime;color:black;">
-            ✅ I have paid
-        </button>
-    </div>
-
+<!-- LOGIN BOX -->
+<div class="box" id="loginBox">
+    <h2 class="title">Login_ ❤️ by Ayush</h2>
+    <input type="text" id="loginUser" placeholder="Enter Username">
+    <input type="password" id="loginPass" placeholder="Enter Password">
+    <span class="eye" onclick="togglePass('loginPass')">👁</span>
+    <button onclick="login()">Login</button>
+    <p class="msg" id="loginMsg"></p>
+    <p class="switch" onclick="showSignup()">Don't have an account? Signup</p>
 </div>
 
-<!-- RECEIPT -->
-<div class="box" id="receiptBox" style="display:none;margin-top:30px;">
-    <h3>🧾 Donation Receipt</h3>
-    <p><b>Name:</b> <span id="rName"></span></p>
-    <p><b>Amount:</b> ₹<span id="rAmount"></span></p>
-    <p><b>Date:</b> <span id="rDate"></span></p>
+<!-- SIGNUP BOX -->
+<div class="box" id="signupBox" style="display:none;">
+    <h2 class="title">Signup</h2>
+    <input type="text" id="signupUser" placeholder="Create Username">
+    <input type="password" id="signupPass" placeholder="Create Password">
+    <span class="eye" onclick="togglePass('signupPass')">👁</span>
+    <button onclick="signup()">Signup</button>
+    <p class="msg" id="signupMsg"></p>
+    <p class="switch" onclick="showLogin()">Already have an account? Login</p>
 </div>
 
-<footer>
-© 2025 | Made with ❤️ by Ayush  help with chatgpt
-<br><br>
-<a href="https://www.instagram.com/ayush_yadav____0" target="_blank">◎ instagram</a>
-<a href="https://www.iibm.in/">🏫iibm</a>
-</footer>
+<!-- 💚 DONATE BOX (ADVANCED – ONLY ADDITION) -->
+<div class="box">
+    <h2 class="title">Debug My Hunger,<br> Not My Code 😜</h2>
+
+    <input id="donateAmount" type="number" placeholder="Enter amount ₹">
+
+    <button onclick="donateUPI()">Donate via UPI</button>
+
+    <!-- QR (Desktop only) -->
+    <div id="qrBox" style="display:none;margin-top:15px;">
+        <img id="upiQR" style="width:180px;border-radius:10px;box-shadow:0 0 15px lime;">
+        <p style="font-size:14px;">Scan & Pay with any UPI app</p>
+    </div>
+
+    <button onclick="confirmPayment()" style="background:lime;color:black;">
+        ✅ I have paid
+    </button>
+</div>
 
 <script>
-/* LOGIN (simple) */
-function login(){
-    if(!loginUser.value){
-        loginMsg.innerText="Enter username";
-        return;
-    }
-    localStorage.setItem("currentUser",loginUser.value);
-    loginMsg.innerText="Login successful";
+function togglePass(id){
+    let input = document.getElementById(id);
+    input.type = (input.type === "password") ? "text" : "password";
+}
+function showSignup(){
+    loginBox.style.display="none";
+    signupBox.style.display="block";
+}
+function showLogin(){
+    signupBox.style.display="none";
+    loginBox.style.display="block";
 }
 
-/* 🔥 UPI + QR AUTO */
+function signup(){
+    let user = signupUser.value;
+    let pass = signupPass.value;
+    if(!user || !pass){
+        signupMsg.innerText="Please fill all fields!";
+        return;
+    }
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    if(users.some(u=>u.username===user)){
+        signupMsg.innerText="Username already taken!";
+        return;
+    }
+    users.push({username:user,password:pass});
+    localStorage.setItem("users",JSON.stringify(users));
+    signupMsg.innerText="Signup Successful!";
+}
+
+function login(){
+    let user = loginUser.value;
+    let pass = loginPass.value;
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let found = users.find(u=>u.username===user && u.password===pass);
+    if(found){
+        localStorage.setItem("loggedIn","true");
+        localStorage.setItem("currentUser",user);
+        window.location.href="SELECT.html";
+    }else{
+        loginMsg.innerText="Wrong Username or Password!";
+    }
+}
+
+/* 💚 ADVANCED DONATE */
 function donateUPI(){
-    const amount=donateAmount.value;
-    if(!amount||amount<=0){alert("Enter valid amount");return;}
+    const amount = donateAmount.value;
+    if(!amount || amount<=0){
+        alert("Enter valid amount");
+        return;
+    }
 
-    const upiId="8579862692@upi";   // 🔴 apna UPI
-    const name="Ayush Website";
-    const note="Support Donation";
+    const upiId = "8579862692@upi"; // 🔴 change if needed
+    const name = "Ayush Website";
+    const note = "Support Donation";
 
-    const upiURL=`upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
+    const upiURL =
+      `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
 
     if(/Android|iPhone|iPad/i.test(navigator.userAgent)){
-        window.location.href=upiURL;
+        window.location.href = upiURL;
     }else{
-        upiQR.src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiURL)}`;
+        upiQR.src =
+          `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiURL)}`;
         qrBox.style.display="block";
     }
 }
 
-/* ✅ CONFIRM + WHATSAPP */
+/* WHATSAPP AFTER PAYMENT */
 function confirmPayment(){
-    rName.innerText=localStorage.getItem("currentUser")||"Guest";
-    rAmount.innerText=donateAmount.value;
-    rDate.innerText=new Date().toLocaleString();
-    receiptBox.style.display="block";
+    const user = localStorage.getItem("currentUser") || "Guest";
+    const amount = donateAmount.value;
+    const phone = "7479711177"; // 🔴 apna WhatsApp number
 
-    const phone="7479711177"; // 🔴 apna WhatsApp number
-    const msg=`Hello Ayush 👋%0AI donated ₹${donateAmount.value}. Screenshot attached.%0AThank you 💚`;
+    const msg =
+      `Hello Ayush 👋%0A`+
+      `I have donated ₹${amount}.%0A`+
+      `Name: ${user}%0A`+
+      `Please find my payment screenshot.%0AThank you 💚`;
+
     window.open(`https://wa.me/${phone}?text=${msg}`,"_blank");
 }
 </script>
+
+<footer>
+© 2025 | Made with ❤️ by Ayush  help ghatgpt
+<br><br>
+<a href="https://www.instagram.com/ayush_yadav____0" target="_blank">◎ instagram</a>
+<a href="https://www.iibm.in/">🏫iibm</a>
+<a href="#">🎀</a>
+<p style="font-size:14px;opacity:0.7;">
+Student Resource Notes | All Rights Reserved | this page create help the chatgpt
+</p>
+</footer>
 
 </body>
 </html>
