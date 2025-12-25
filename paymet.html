@@ -165,13 +165,16 @@ h1{
     <div class="sub">Your support keeps this project alive ☕</div>
 
     <div class="amount-box">
-        <label>Enter Donation Amount (₹)</label>
+        <label>Enter Donation Amount (₹) <br>Minimum donation ₹10
+</label>
         <input id="amount" type="number" placeholder="100">
 
         <div class="quick">
+            
+
+            <button onclick="setAmt(10)">₹10</button>
+            <button onclick="setAmt(20)">₹20</button>
             <button onclick="setAmt(50)">₹50</button>
-            <button onclick="setAmt(100)">₹100</button>
-            <button onclick="setAmt(500)">₹500</button>
         </div>
     </div>
 
@@ -184,6 +187,25 @@ h1{
     </div>
 
 </div>
+<!-- QR BOX -->
+<div id="qrBox" style="
+    display:none;
+    margin-top:15px;
+    text-align:center;
+">
+    <img id="upiQR"
+         style="width:200px;border-radius:12px;
+         box-shadow:0 0 20px rgba(0,255,213,.7);">
+    <p style="font-size:13px;opacity:.8;margin-top:6px;">
+        Scan & Pay with any UPI app
+    </p>
+</div>
+<!--qrhide-->
+
+</button>
+
+
+
 
 <script>
 function setAmt(v){
@@ -222,7 +244,40 @@ function payUPI(){
 
 function goBack(){
     window.location.href = "index.html";
+
 }
+function payUPI(){
+    const amt = document.getElementById("amount").value;
+
+    if(!amt || amt < 10){
+        alert("Minimum donation is ₹10");
+        return;
+    }
+
+    const upiId = "8579862692@upi";   // 🔴 apna UPI
+    const name  = "Ayush Website";
+    const note  = "Support Donation";
+
+    const upiURL =
+      `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amt}&cu=INR&tn=${encodeURIComponent(note)}`;
+
+    // 📱 Mobile → Direct UPI app
+    if(/Android|iPhone|iPad/i.test(navigator.userAgent)){
+        window.location.href = upiURL;
+    }
+    // 🖥️ Desktop → QR show
+    else{
+        document.getElementById("upiQR").src =
+          `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiURL)}`;
+
+        document.getElementById("qrBox").style.display = "block";
+        setTimeout(()=>qrBox.style.display="none",10000);
+    }
+   
+
+}
+
+
 </script>
 
 </body>
