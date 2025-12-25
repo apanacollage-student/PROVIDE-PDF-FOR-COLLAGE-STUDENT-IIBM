@@ -1,293 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Login</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayush | Secure Login</title>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background: #0404bd;
-            font-family: Arial, sans-serif;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-image: url("https://www.xda-developers.com/wp-content/uploads/2012/03/Code.jpeg");
-            background-size: cover;
-            background-position: center;
-            animation: bgMove 15s infinite alternate ease-in-out;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
 
-        @keyframes bgMove {
-            0% { background-position: center; }
-            100% { background-position: bottom; }
-        }
+/* ===== BACKGROUND ===== */
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at top left,#00ffd5,transparent 55%),
+      radial-gradient(circle at bottom right,#6a00ff,transparent 55%),
+      #050010;
+    color:#fff;
+}
 
-        .box {
-            
-            width: 90%;
-            max-width: 350px;
-            background: rgba(255, 255, 255, 0.12);
-            padding: 25px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            text-align: center;
-            color: rgb(255, 220, 150);
-            font-size: 16px;
-            box-shadow: 0 0 20px cyan;
-            animation: floatBox 3s infinite ease-in-out;
-        }
+/* ===== GLASS CARD ===== */
+.container{
+    width:92%;
+    max-width:380px;
+    padding:30px;
+    border-radius:22px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 30px 80px rgba(0,0,0,.7);
+    text-align:center;
+}
 
-        @keyframes floatBox {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
-        }
+/* ===== BRAND ===== */
+.brand{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:6px;
+    letter-spacing:.5px;
+}
+.brand span{color:#00ffd5}
+.tagline{
+    font-size:13px;
+    opacity:.75;
+    margin-bottom:22px;
+}
 
-        .title {
-            font-size: 28px;
-            border-right: 3px solid white;
-            width: fit-content;
-            margin: auto;
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typing 2s steps(20), blink .7s infinite;
-        }
+/* ===== INPUTS ===== */
+input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border-radius:14px;
+    border:none;
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    font-size:16px;
+    outline:none;
+}
+input::placeholder{color:#ddd}
+input:focus{
+    box-shadow:0 0 0 2px rgba(0,255,213,.5);
+}
 
-        @keyframes typing {
-            from { width: 0; }
-        }
+/* ===== BUTTONS ===== */
+button{
+    width:100%;
+    padding:14px;
+    margin-top:14px;
+    border:none;
+    border-radius:16px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+.login-btn{
+    background:linear-gradient(135deg,#00ffd5,#00aaff);
+    color:#022;
+}
+.login-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(0,255,213,.6);
+}
+.support-btn{
+    background:rgba(255,255,255,.15);
+    color:#fff;
+}
+.support-btn:hover{background:rgba(255,255,255,.25)}
 
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
+.switch{
+    margin-top:14px;
+    font-size:14px;
+    color:#ffd86b;
+    cursor:pointer;
+}
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 12px 0;
-            border-radius: 8px;
-            border: none;
-            font-size: 18px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            outline: none;
-            transition: 0.3s;
-        }
+/* ===== TOAST ===== */
+.toast{
+    position:fixed;
+    top:20px;
+    right:20px;
+    padding:14px 18px;
+    border-radius:14px;
+    font-weight:600;
+    color:#fff;
+    opacity:0;
+    transform:translateY(-20px);
+    transition:.4s;
+    z-index:9999;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.success{background:linear-gradient(135deg,#00ff99,#00cc88)}
+.toast.error{background:linear-gradient(135deg,#ff5f5f,#ff2e2e)}
 
-        input:focus {
-            box-shadow: 0 0 12px cyan;
-            background: rgba(255,255,255,0.3);
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            font-size: 20px;
-            background: cyan;
-            border-radius: 8px;
-            cursor: pointer;
-            border: none;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #071398;
-            color: white;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #00f6ff;
-        }
-
-        .switch {
-            color: yellow;
-            cursor: pointer;
-            font-size: 17px;
-        }
-
-        .msg {
-            font-weight: bold;
-            margin-top: 15px;
-        }
-
-        .eye {
-            float: right;
-            margin-top: -46px;
-            margin-right: 10px;
-            cursor: pointer;
-            color: white;
-        }
-
-        footer {
-            margin-top: 40px;
-            width: 100%;
-            text-align: center;
-            padding: 15px 0;
-            background: rgba(0, 0, 0, 0.4);
-            color: white;
-            font-size: 16px;
-            animation: footerglow 4s infinite alternate;
-        }
-
-        @keyframes footerglow {
-            from { box-shadow: 0 0 10px cyan; }
-            to { box-shadow: 0 0 25px cyan; }
-        }
-
-        footer a {
-            color: cyan;
-            font-size: 30px;
-            margin: 0 8px;
-            text-decoration: none;
-        }
-    </style>
+/* ===== LOADER ===== */
+#loader{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9998;
+}
+.spinner{
+    width:60px;
+    height:60px;
+    border:6px solid rgba(255,255,255,.2);
+    border-top:6px solid #00ffd5;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
 </head>
 
 <body>
 
-<!-- LOGIN BOX -->
-<div class="box" id="loginBox">
-    <h2 class="title">Login_ ❤️ by Ayush</h2>
-    <input type="text" id="loginUser" placeholder="Enter Username">
-    <input type="password" id="loginPass" placeholder="Enter Password">
-    <span class="eye" onclick="togglePass('loginPass')">👁</span>
-    <button onclick="login()">Login</button>
-    <p class="msg" id="loginMsg"></p>
-    <p class="switch" onclick="showSignup()">Don't have an account? Signup</p>
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<!-- LOADER -->
+<div id="loader"><div class="spinner"></div></div>
+
+<!-- SOUND -->
+<audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-951.mp3"></audio>
+<audio id="errorSound" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
+
+<!-- LOGIN CARD -->
+<div class="container" id="loginBox">
+    <div class="brand">Ayush<span>App</span></div>
+    <div class="tagline">Secure • Fast • Simple</div>
+
+    <input id="loginUser" placeholder="Username">
+    <input id="loginPass" type="password" placeholder="Password">
+
+    <button class="login-btn" onclick="login()">Login</button>
+    <button class="support-btn" onclick="goPayment()">💚 Support / Donate</button>
+
+    <div class="switch" onclick="showSignup()">Create new account</div>
 </div>
 
-<!-- SIGNUP BOX -->
-<div class="box" id="signupBox" style="display:none;">
-    <h2 class="title">Signup</h2>
-    <input type="text" id="signupUser" placeholder="Create Username">
-    <input type="password" id="signupPass" placeholder="Create Password">
-    <span class="eye" onclick="togglePass('signupPass')">👁</span>
-    <button onclick="signup()">Signup</button>
-    <p class="msg" id="signupMsg"></p>
-    <p class="switch" onclick="showLogin()">Already have an account? Login</p>
-</div>
+<!-- SIGNUP -->
+<div class="container" id="signupBox" style="display:none">
+    <div class="brand">Create<span>Account</span></div>
+    <div class="tagline">Join the experience</div>
 
-<!-- 💚 DONATE BOX (ADVANCED – ONLY ADDITION) -->
-<div class="box">
-    <h2 class="title">Debug My Hunger,<br> Not My Code 😜</h2>
+    <input id="signupUser" placeholder="Username">
+    <input id="signupPass" type="password" placeholder="Password">
 
-    <input id="donateAmount" type="number" placeholder="Enter amount ₹">
-
-    <button onclick="donateUPI()">Donate via UPI</button>
-
-    <!-- QR (Desktop only) -->
-    <div id="qrBox" style="display:none;margin-top:15px;">
-        <img id="upiQR" style="width:180px;border-radius:10px;box-shadow:0 0 15px lime;">
-        <p style="font-size:14px;">Scan & Pay with any UPI app</p>
-    </div>
-
-    <button onclick="confirmPayment()" style="background:lime;color:black;">
-        ✅ I have paid
-    </button>
+    <button class="login-btn" onclick="signup()">Signup</button>
+    <div class="switch" onclick="showLogin()">Back to login</div>
 </div>
 
 <script>
-function togglePass(id){
-    let input = document.getElementById(id);
-    input.type = (input.type === "password") ? "text" : "password";
-}
-function showSignup(){
-    loginBox.style.display="none";
-    signupBox.style.display="block";
-}
-function showLogin(){
-    signupBox.style.display="none";
-    loginBox.style.display="block";
+function toast(msg,type){
+    const t=document.getElementById("toast");
+    t.className="toast "+type;
+    t.innerText=msg;
+    t.classList.add("show");
+    setTimeout(()=>t.classList.remove("show"),2500);
 }
 
+function showSignup(){loginBox.style.display="none";signupBox.style.display="block"}
+function showLogin(){signupBox.style.display="none";loginBox.style.display="block"}
+
 function signup(){
-    let user = signupUser.value;
-    let pass = signupPass.value;
-    if(!user || !pass){
-        signupMsg.innerText="Please fill all fields!";
-        return;
-    }
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    if(users.some(u=>u.username===user)){
-        signupMsg.innerText="Username already taken!";
-        return;
-    }
-    users.push({username:user,password:pass});
+    let u=signupUser.value,p=signupPass.value;
+    if(!u||!p){toast("Fill all fields","error");errorSound.play();return;}
+    let users=JSON.parse(localStorage.getItem("users"))||[];
+    users.push({username:u,password:p});
     localStorage.setItem("users",JSON.stringify(users));
-    signupMsg.innerText="Signup Successful!";
+    successSound.play();
+    toast("Account created","success");
 }
 
 function login(){
-    let user = loginUser.value;
-    let pass = loginPass.value;
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    let found = users.find(u=>u.username===user && u.password===pass);
-    if(found){
-        localStorage.setItem("loggedIn","true");
-        localStorage.setItem("currentUser",user);
-        window.location.href="SELECT.html";
-    }else{
-        loginMsg.innerText="Wrong Username or Password!";
-    }
+    let u=loginUser.value,p=loginPass.value;
+    let users=JSON.parse(localStorage.getItem("users"))||[];
+    let ok=users.find(x=>x.username===u&&x.password===p);
+
+    loader.style.display="flex";
+    setTimeout(()=>{
+        loader.style.display="none";
+        if(ok){
+            successSound.play();
+            toast("Welcome "+u,"success");
+            localStorage.setItem("currentUser",u);
+            setTimeout(()=>location.href="SELECT.html",1200);
+        }else{
+            errorSound.play();
+            toast("Invalid credentials","error");
+        }
+    },1200);
 }
 
-/* 💚 ADVANCED DONATE */
-function donateUPI(){
-    const amount = donateAmount.value;
-    if(!amount || amount<=0){
-        alert("Enter valid amount");
-        return;
-    }
-
-    const upiId = "8579862692@upi"; // 🔴 change if needed
-    const name = "Ayush Website";
-    const note = "Support Donation";
-
-    const upiURL =
-      `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
-
-    if(/Android|iPhone|iPad/i.test(navigator.userAgent)){
-        window.location.href = upiURL;
-    }else{
-        upiQR.src =
-          `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiURL)}`;
-        qrBox.style.display="block";
-    }
-}
-
-/* WHATSAPP AFTER PAYMENT */
-function confirmPayment(){
-    const user = localStorage.getItem("currentUser") || "Guest";
-    const amount = donateAmount.value;
-    const phone = "7479711177"; // 🔴 apna WhatsApp number
-
-    const msg =
-      `Hello Ayush 👋%0A`+
-      `I have donated ₹${amount}.%0A`+
-      `Name: ${user}%0A`+
-      `Please find my payment screenshot.%0AThank you ❤️`;
-
-    window.open(`https://wa.me/${phone}?text=${msg}`,"_blank");
+function goPayment(){
+    localStorage.setItem("currentUser",loginUser.value||"Guest");
+    location.href="paymet.html";
 }
 </script>
-
-<footer>
-© 2025 | Made with ❤️ by Ayush  help ghatgpt
-<br><br>
-<a href="https://www.instagram.com/ayush_yadav____0" target="_blank">◎ instagram</a>
-<a href="https://www.iibm.in/">🏫iibm</a>
-<a href="#">🎀</a>
-<p style="font-size:14px;opacity:0.7;">
-Student Resource Notes | All Rights Reserved | this page create help the chatgpt
-</p>
-</footer>
 
 </body>
 </html>

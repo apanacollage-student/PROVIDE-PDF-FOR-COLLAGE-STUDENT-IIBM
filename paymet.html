@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Support the Creator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Segoe UI",Arial,sans-serif}
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at top right,#ff8a00,transparent 55%),
+      radial-gradient(circle at bottom left,#00ffd5,transparent 55%),
+      #070013;
+    color:#fff;
+    overflow:hidden;
+}
+
+/* glow blobs */
+.glow{
+    position:absolute;
+    width:260px;
+    height:260px;
+    background:#00ffd5;
+    filter:blur(130px);
+    opacity:.22;
+    animation:float 8s infinite alternate ease-in-out;
+}
+@keyframes float{
+    from{transform:translate(-120px,-60px)}
+    to{transform:translate(120px,80px)}
+}
+
+/* card */
+.card{
+    width:92%;
+    max-width:420px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(14px);
+    border-radius:22px;
+    padding:28px;
+    text-align:center;
+    box-shadow:0 30px 80px rgba(0,0,0,.7);
+    position:relative;
+    z-index:2;
+}
+
+/* header */
+.icon{
+    width:70px;
+    height:70px;
+    margin:0 auto 10px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ffb347,#ffcc33);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    color:#2b1500;
+    box-shadow:0 0 25px #ffb347;
+}
+
+h1{
+    font-size:26px;
+    margin-bottom:6px;
+}
+.sub{
+    font-size:14px;
+    opacity:.85;
+    margin-bottom:18px;
+}
+
+/* amount box */
+.amount-box{
+    background:rgba(0,0,0,.45);
+    padding:18px;
+    border-radius:16px;
+    margin-bottom:16px;
+}
+
+.amount-box label{
+    display:block;
+    font-size:13px;
+    opacity:.8;
+    margin-bottom:6px;
+}
+
+.amount-box input{
+    width:100%;
+    padding:14px;
+    font-size:22px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    text-align:center;
+    outline:none;
+}
+
+/* quick buttons */
+.quick{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+.quick button{
+    flex:1;
+    padding:10px;
+    font-size:14px;
+    border-radius:12px;
+    border:none;
+    background:rgba(255,255,255,.15);
+    color:#fff;
+    cursor:pointer;
+}
+.quick button:hover{
+    background:rgba(255,255,255,.25);
+}
+
+/* pay button */
+.pay{
+    width:100%;
+    padding:14px;
+    margin-top:18px;
+    border:none;
+    border-radius:16px;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(135deg,#00ffd5,#00aaff);
+    color:#022;
+}
+.pay:hover{opacity:.9}
+
+/* back */
+.back{
+    margin-top:12px;
+    font-size:13px;
+    opacity:.75;
+    cursor:pointer;
+}
+
+.note{
+    margin-top:14px;
+    font-size:12px;
+    opacity:.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow"></div>
+
+<div class="card">
+
+    <div class="icon">💚</div>
+
+    <h1>Support the Creator</h1>
+    <div class="sub">Your support keeps this project alive ☕</div>
+
+    <div class="amount-box">
+        <label>Enter Donation Amount (₹)</label>
+        <input id="amount" type="number" placeholder="100">
+
+        <div class="quick">
+            <button onclick="setAmt(50)">₹50</button>
+            <button onclick="setAmt(100)">₹100</button>
+            <button onclick="setAmt(500)">₹500</button>
+        </div>
+    </div>
+
+    <button class="pay" onclick="payUPI()">Pay via UPI</button>
+
+    <div class="back" onclick="goBack()">← Back to Home</div>
+
+    <div class="note">
+        You will be redirected to your UPI app to complete the payment.
+    </div>
+
+</div>
+
+<script>
+function setAmt(v){
+    document.getElementById("amount").value = v;
+}
+
+function payUPI(){
+    const amt = document.getElementById("amount").value;
+    if(!amt || amt<=0){
+        alert("Please enter a valid amount");
+        return;
+    }
+
+    // save fake receipt data
+    localStorage.setItem("donationAmount", amt);
+    localStorage.setItem("donationTime", new Date().toLocaleString());
+    localStorage.setItem(
+        "donationTxn",
+        "TXN"+Math.floor(Math.random()*100000000)
+    );
+
+    const upiId = "8579862692@upi";   // 🔴 apna UPI ID
+    const note = "Support Donation";
+
+    const url =
+      `upi://pay?pa=${upiId}&am=${amt}&cu=INR&tn=${encodeURIComponent(note)}`;
+
+    // open UPI app
+    window.location.href = url;
+
+    // fake success redirect
+    setTimeout(()=>{
+        window.location.href = "sucess.html";
+    },2000);
+}
+
+function goBack(){
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
