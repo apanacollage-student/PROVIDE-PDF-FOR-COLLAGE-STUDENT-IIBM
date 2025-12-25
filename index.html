@@ -3,14 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayush | Secure Login</title>
+<title>Login | Ayush</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
-
-/* ===== BACKGROUND ===== */
+*{box-sizing:border-box}
 body{
-    min-height:100vh;
+   min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -20,80 +18,66 @@ body{
       #050010;
     color:#fff;
 }
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:-1;
+}
 
-/* ===== GLASS CARD ===== */
-.container{
-    width:92%;
-    max-width:380px;
-    padding:30px;
-    border-radius:22px;
-    background:rgba(255,255,255,.12);
-    backdrop-filter:blur(16px);
-    border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 30px 80px rgba(0,0,0,.7);
+/* ===== LOGIN CARD ===== */
+.box{
+    width:90%;
+    max-width:360px;
+    padding:26px;
+    border-radius:18px;
+    background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.05));
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow:0 20px 40px rgba(0,0,0,.6);
     text-align:center;
+    color:#ffe3a3;
 }
 
-/* ===== BRAND ===== */
-.brand{
-    font-size:28px;
-    font-weight:700;
-    margin-bottom:6px;
-    letter-spacing:.5px;
-}
-.brand span{color:#00ffd5}
-.tagline{
-    font-size:13px;
-    opacity:.75;
-    margin-bottom:22px;
+.title{
+    font-size:26px;
+    margin-bottom:14px;
+    text-shadow:0 0 12px rgba(0,255,255,.7);
 }
 
-/* ===== INPUTS ===== */
 input{
     width:100%;
-    padding:14px;
+    padding:12px;
     margin:10px 0;
-    border-radius:14px;
+    border-radius:10px;
     border:none;
     background:rgba(255,255,255,.18);
     color:#fff;
     font-size:16px;
-    outline:none;
 }
 input::placeholder{color:#ddd}
-input:focus{
-    box-shadow:0 0 0 2px rgba(0,255,213,.5);
-}
 
-/* ===== BUTTONS ===== */
 button{
     width:100%;
-    padding:14px;
-    margin-top:14px;
+    padding:12px;
+    margin-top:12px;
+    font-size:17px;
+    border-radius:10px;
     border:none;
-    border-radius:16px;
-    font-size:16px;
-    font-weight:600;
     cursor:pointer;
+    background:linear-gradient(135deg,cyan,#00ffd5);
+    color:#022;
+    font-weight:600;
     transition:.25s;
 }
-.login-btn{
-    background:linear-gradient(135deg,#00ffd5,#00aaff);
-    color:#022;
-}
-.login-btn:hover{
+button:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 30px rgba(0,255,213,.6);
+    box-shadow:0 10px 25px rgba(0,255,255,.6);
 }
-.support-btn{
-    background:rgba(255,255,255,.15);
-    color:#fff;
-}
-.support-btn:hover{background:rgba(255,255,255,.25)}
 
 .switch{
-    margin-top:14px;
-    font-size:14px;
+    margin-top:12px;
     color:#ffd86b;
     cursor:pointer;
 }
@@ -104,7 +88,7 @@ button{
     top:20px;
     right:20px;
     padding:14px 18px;
-    border-radius:14px;
+    border-radius:12px;
     font-weight:600;
     color:#fff;
     opacity:0;
@@ -112,11 +96,14 @@ button{
     transition:.4s;
     z-index:9999;
 }
-.toast.show{opacity:1;transform:translateY(0)}
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
 .toast.success{background:linear-gradient(135deg,#00ff99,#00cc88)}
 .toast.error{background:linear-gradient(135deg,#ff5f5f,#ff2e2e)}
 
-/* ===== LOADER ===== */
+/* ===== LOADING SPINNER ===== */
 #loader{
     position:fixed;
     inset:0;
@@ -130,59 +117,57 @@ button{
     width:60px;
     height:60px;
     border:6px solid rgba(255,255,255,.2);
-    border-top:6px solid #00ffd5;
+    border-top:6px solid cyan;
     border-radius:50%;
     animation:spin 1s linear infinite;
 }
-@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
 </style>
 </head>
 
 <body>
 
-<!-- TOAST -->
+<!-- 🔔 TOAST -->
 <div id="toast" class="toast"></div>
 
-<!-- LOADER -->
-<div id="loader"><div class="spinner"></div></div>
+<!-- ⏳ LOADER -->
+<div id="loader">
+    <div class="spinner"></div>
+</div>
 
-<!-- SOUND -->
+<!-- 🔊 SOUND -->
 <audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-951.mp3"></audio>
 <audio id="errorSound" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
 
-<!-- LOGIN CARD -->
-<div class="container" id="loginBox">
-    <div class="brand">Ayush<span>App</span></div>
-    <div class="tagline">Secure • Fast • Simple</div>
-
+<!-- LOGIN -->
+<div class="box" id="loginBox">
+    <h2 class="title">Login ❤️ by Ayush</h2>
     <input id="loginUser" placeholder="Username">
     <input id="loginPass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <button onclick="goPayment()">💚 Support / Donate</button>
 
-    <button class="login-btn" onclick="login()">Login</button>
-    <button class="support-btn" onclick="goPayment()">💚 Support / Donate</button>
-
-    <div class="switch" onclick="showSignup()">Create new account</div>
+    <p class="switch" onclick="showSignup()">Create new account</p>
 </div>
 
 <!-- SIGNUP -->
-<div class="container" id="signupBox" style="display:none">
-    <div class="brand">Create<span>Account</span></div>
-    <div class="tagline">Join the experience</div>
-
+<div class="box" id="signupBox" style="display:none">
+    <h2 class="title">Signup</h2>
     <input id="signupUser" placeholder="Username">
     <input id="signupPass" type="password" placeholder="Password">
-
-    <button class="login-btn" onclick="signup()">Signup</button>
-    <div class="switch" onclick="showLogin()">Back to login</div>
+    <button onclick="signup()">Signup</button>
+    <p class="switch" onclick="showLogin()">Back to login</p>
 </div>
 
 <script>
-function toast(msg,type){
-    const t=document.getElementById("toast");
-    t.className="toast "+type;
-    t.innerText=msg;
-    t.classList.add("show");
-    setTimeout(()=>t.classList.remove("show"),2500);
+function showToast(msg,type){
+    const toast=document.getElementById("toast");
+    toast.className="toast "+type;
+    toast.innerText=msg;
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"),2500);
 }
 
 function showSignup(){loginBox.style.display="none";signupBox.style.display="block"}
@@ -190,12 +175,16 @@ function showLogin(){signupBox.style.display="none";loginBox.style.display="bloc
 
 function signup(){
     let u=signupUser.value,p=signupPass.value;
-    if(!u||!p){toast("Fill all fields","error");errorSound.play();return;}
+    if(!u||!p){
+        showToast("Fill all fields","error");
+        errorSound.play();
+        return;
+    }
     let users=JSON.parse(localStorage.getItem("users"))||[];
     users.push({username:u,password:p});
     localStorage.setItem("users",JSON.stringify(users));
+    showToast("Signup successful","success");
     successSound.play();
-    toast("Account created","success");
 }
 
 function login(){
@@ -204,24 +193,30 @@ function login(){
     let ok=users.find(x=>x.username===u&&x.password===p);
 
     loader.style.display="flex";
+
     setTimeout(()=>{
         loader.style.display="none";
         if(ok){
             successSound.play();
-            toast("Welcome "+u,"success");
-            localStorage.setItem("currentUser",u);
-            setTimeout(()=>location.href="SELECT.html",1200);
+            showToast("Welcome back "+u+" 👋","success");
+            localStorage.setItem("loggedIn","true");
+            setTimeout(()=>location.href="SELECT.html",1500);
         }else{
             errorSound.play();
-            toast("Invalid credentials","error");
+            showToast("Wrong username or password","error");
         }
     },1200);
+
+ 
 }
+
 
 function goPayment(){
     localStorage.setItem("currentUser",loginUser.value||"Guest");
     location.href="paymet.html";
 }
+
+
 </script>
 
 </body>
